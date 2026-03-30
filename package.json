@@ -1,0 +1,12 @@
+{
+  "name": "real-estate-site",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node build.js && netlify dev",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.12"
+  }
+}
