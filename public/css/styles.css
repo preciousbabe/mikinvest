@@ -239,7 +239,7 @@ nav {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: calc(100% + 4rem);
+  height: calc(100% + 8rem);
   width: 100%;
   padding-top: 4rem;
   padding-right: 2rem;
@@ -935,4 +935,60 @@ background: linear-gradient(to bottom, #DCEEFF, #FFFFFF);
 
   font-size: 30px;
   color: white;
+}
+
+/* Button base */
+.invest-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 25px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  animation: swing 2s infinite ease-in-out;
+}
+
+/* Star styling */
+.star {
+  margin: 0 8px;
+  font-size: 24px;
+  display: inline-block;
+  animation: twinkle 1.5s infinite alternate;
+}
+
+.star.left {
+  animation-delay: 0s;
+}
+
+.star.right {
+  animation-delay: 0.75s; /* offset so they don’t twinkle at the same time */
+}
+
+/* Button swing/dangle animation */
+@keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Star twinkle animation */
+@keyframes twinkle {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+/* Optional hover effect to make it pop more */
+.invest-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }

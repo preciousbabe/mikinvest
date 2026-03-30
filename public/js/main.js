@@ -85,12 +85,7 @@ ScrollReveal().reveal(".gallery__item", {
   interval: 150
 });
 
-// Video wrappers (for smoother effect)
-ScrollReveal().reveal(".video-wrapper", {
-  ...scrollRevealOption,
-  interval: 150,
-  delay: 200
-});
+
 ScrollReveal().reveal(".service__card", {
   ...scrollRevealOption,
   delay: 500,
