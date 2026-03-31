@@ -3,7 +3,7 @@ backend:
   branch: main
   local_backend: true
 
-media_folder: "public/images"
+media_folder: "images"
 public_folder: "/images"
 
 collections:
