@@ -11,10 +11,15 @@ collections:
     label: "Properties"
     folder: "content/properties"
     create: true
-    slug: "{{uuid}}"
+    slug: "{{fields.slug}}" # <-- use hidden field
     format: "json"
 
     fields:
+      - label: "Slug"
+        name: "slug"
+        widget: "hidden"
+        default: "{{uuid}}"
+
       - label: "Property Title"
         name: "title"
         widget: "string"
