@@ -143,7 +143,7 @@ nav {
 }
 
 .header__image.reveal {
-  background-image: url("assets/rew.png");
+  background-image: url("/assets/rew.png");
 }
 
 .header__image.reveal::after {

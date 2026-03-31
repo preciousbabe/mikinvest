@@ -31,6 +31,7 @@ const scrollRevealOption = {
   duration: 1000,
 };
 
+
 ScrollReveal().reveal(".header__content h1", {
   ...scrollRevealOption,
   delay: 1500,

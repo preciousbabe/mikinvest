@@ -3,7 +3,7 @@ backend:
   branch: main
   local_backend: true
 
-media_folder: "images"
+media_folder: "public/images"
 public_folder: "/images"
 
 collections:
@@ -11,13 +11,36 @@ collections:
     label: "Properties"
     folder: "content/properties"
     create: true
-    slug: "{{slug}}"
+    slug: "{{uuid}}"
     format: "json"
-    fields:
-      - { label: "Property Title", name: "title", widget: "string", required: false }
-      - { label: "Price", name: "price", widget: "string", required: false }
-      - { label: "Location", name: "location", widget: "string", required: false }
-      - { label: "Image (Flyer)", name: "image", widget: "image", required: false }
-      - { label: "Extra Notes", name: "body", widget: "text", required: false }
 
-      
+    fields:
+      - label: "Property Title"
+        name: "title"
+        widget: "string"
+        required: false
+        default: ""
+
+      - label: "Price"
+        name: "price"
+        widget: "string"
+        required: false
+        default: ""
+
+      - label: "Location"
+        name: "location"
+        widget: "string"
+        required: false
+        default: ""
+
+      - label: "Image (Flyer)"
+        name: "image"
+        widget: "image"
+        required: false
+        allow_multiple: false
+
+      - label: "Extra Notes"
+        name: "body"
+        widget: "text"
+        required: false
+        default: ""
