@@ -11,10 +11,12 @@ collections:
     label: "Properties"
     folder: "content/properties"
     create: true
-    slug: "{{fields.slug}}" # <-- use hidden field
+    slug: "{{fields.slug}}"       # <- use hidden slug for filenames
+    identifier_field: "slug"     # <- explicitly tells CMS what field is the unique ID
     format: "json"
 
     fields:
+      # Hidden slug ensures unique filenames and allows all other fields to be optional
       - label: "Slug"
         name: "slug"
         widget: "hidden"
