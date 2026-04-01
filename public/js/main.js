@@ -126,17 +126,20 @@ const swiper = new Swiper('.gallery__swiper', {
 document.getElementById('toggleViewBtn').addEventListener('click', function (e) {
     e.preventDefault();
 
-    const hiddenCards = document.querySelectorAll('.menu__card.hidden');
+    // ✅ Select the extra cards using the permanent 'extra' class
+    const extraCards = document.querySelectorAll('.menu__card.extra');
 
-    hiddenCards.forEach(card => {
-        card.classList.toggle('show');
+    // Toggle hidden class (this is what actually shows/hides them)
+    extraCards.forEach(card => {
+        card.classList.toggle('hidden');
     });
 
-    this.textContent = this.textContent.includes('More') 
-        ? 'View Less' 
-        : 'View More';
+    // ✅ Fix button text + keep the arrow icon every time
+    const isMore = this.textContent.includes('More');
+    this.innerHTML = isMore 
+        ? `View Less <i class="ri-arrow-right-long-line"></i>` 
+        : `View More <i class="ri-arrow-right-long-line"></i>`;
 });
-
 
 
 // Initialize Swiper

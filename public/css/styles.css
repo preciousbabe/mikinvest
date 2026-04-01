@@ -366,7 +366,7 @@ nav {
 }
 
 .hidden {
-  display: none !important;  /* Completely removes the element from layout */
+  display: none !important; 
 }
 .section__container {
   max-width: var(--max-width);
@@ -413,61 +413,85 @@ nav {
   color: var(--primary-color-dark);
 }
 
+/* ====================== GRID - Masonry Style ====================== */
 .menu__grid {
   display: grid;
-  gap: 2rem 1rem;
+  gap: 2rem 1.5rem;
+  align-items: start;           /* Important for masonry effect */
 }
 
+@media (width > 540px) {
+  .menu__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width > 768px) {
+  .menu__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (width > 1024px) {
+  .menu__grid {
+    gap: 1.8rem 1.5rem;
+  }
+}
+
+/* ====================== CARD - Masonry Style ====================== */
 .menu__card {
   max-width: 300px;
   margin-inline: auto;
   box-shadow: 20px 5px 30px rgba(0, 0, 0, 0.4);
-  transition: 0.3s;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  /* No height: 100% — this allows natural height */
 }
 
 .menu__card:hover {
   transform: translateY(-1rem);
 }
 
+/* Image - Natural aspect ratio, no forced height */
+.menu__card img {
+  width: 100%;
+  height: auto;                  /* Keeps original image proportions */
+  display: block;
+  object-fit: cover;             /* Still crops a bit for better framing */
+}
+
+/* If you prefer ZERO cropping (full image always visible), use this instead: */
+/*
+.menu__card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f8f9fa;
+}
+*/
+
 .menu__card__content {
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
 }
 
-.menu__card__content h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 800;
-  font-family: var(--header-font);
-  color: var(--text-dark);
+.menu__card__content h4,
+.menu__card__content p,
+.menu__card__content span {
+  margin: 0;
 }
 
-.menu__card__content h3 {
-  font-size: 1.2rem;
+.menu__card__content span {
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--primary-color);
-}
-@media (width > 540px) {
-  .menu__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-@media (width > 1024px) {
-  .menu__grid {
-    gap: 1.5rem;
-  }
-
-  .menu__card__content {
-    padding: 1.5rem;
-  }
-}
-
-@media (width > 768px) {
-.menu__grid {
-  grid-template-columns: repeat(4, 1fr);
-}
 }
 
 .about__container {

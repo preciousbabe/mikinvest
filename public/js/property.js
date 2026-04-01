@@ -29,8 +29,8 @@ async function loadProperties() {
                 return;
             }
 
-            // ✅ Handle hidden logic AFTER filtering
-            const isHidden = visibleIndex >= 4 ? 'hidden' : '';
+          // ✅ NEW: Add both 'extra' (for permanent selection) + 'hidden' for the first 4+
+             const extraClass = visibleIndex >= 4 ? ' extra hidden' : '';
             visibleIndex++;
 
             // ✅ Safe trimmed rendering
@@ -54,10 +54,9 @@ async function loadProperties() {
                     : '/' + property.image;
             }
 
-            const card = `
-                <div class="menu__card ${isHidden}">
-                    ${imageSrc ? `<img src="${imageSrc}" alt="${property.title?.trim() || 'Property'}" />` : ''}
-                    
+                 const card = `
+                <div class="menu__card${extraClass}">
+                  ${imageSrc ? `<img src="${imageSrc}" alt="${property.title?.trim() || 'Property'}" />` : ''}
                     <div class="menu__card__content">
                         ${titleHTML}
                         ${locationHTML}
@@ -75,6 +74,13 @@ async function loadProperties() {
                 <p style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
                     No valid properties to display.
                 </p>`;
+        }
+
+                // ✅ Auto-hide toggle button if there are 4 or fewer valid properties
+        const toggleBtn = document.getElementById('toggleViewBtn');
+        if (toggleBtn) {
+            const hasExtra = grid.querySelector('.menu__card.extra');
+            toggleBtn.style.display = hasExtra ? 'inline-block' : 'none';
         }
 
     } catch (err) {
