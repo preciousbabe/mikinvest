@@ -31,7 +31,6 @@ const scrollRevealOption = {
   duration: 1000,
 };
 
-
 ScrollReveal().reveal(".header__content h1", {
   ...scrollRevealOption,
   delay: 1500,
@@ -80,11 +79,6 @@ ScrollReveal().reveal(".banner__content h2", {
   ...scrollRevealOption,
   delay: 500,
 });
-// Photo gallery items
-ScrollReveal().reveal(".gallery__item", {
-  ...scrollRevealOption,
-  interval: 150
-});
 
 
 ScrollReveal().reveal(".service__card", {
@@ -96,55 +90,81 @@ ScrollReveal().reveal(".menu__card", {
   interval: 500,
 });
 
-
-
-
-
-// Initialize Swiper
-const swiper = new Swiper('.gallery__swiper', {
-  slidesPerView: 1, // Default for mobile
-  spaceBetween: 10,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-  breakpoints: {
-    640: {
-      slidesPerView: 2, // For tablets
+// Initialize Gallery Swiper after ScrollReveal setup completes
+setTimeout(() => {
+  const swiper = new Swiper('.gallery__swiper', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    observer: true,
+    observeParents: true,
+    watchOverflow: true,
+    resizeObserver: true,
+    autoHeight: false,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
-    1024: {
-      slidesPerView: 3, // For desktops
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
     },
-  },
-});
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+    on: {
+      init: function() {
+        setTimeout(() => this.update(), 100);
+      }
+    }
+  });
 
+  // Force recalculation after all images and fonts load
+  window.addEventListener('load', () => {
+    swiper.update();
+    swiper.updateSize();
+    swiper.updateSlides();
+    swiper.slideTo(0, 0);
+  });
+
+  // Video click handlers - use display:none instead of innerHTML to preserve layout
+  document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+    wrapper.addEventListener('click', () => {
+      const videoId = wrapper.dataset.videoId;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&controls=1`;
+      iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;';
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      
+      const poster = wrapper.querySelector('.video-poster');
+      const playBtn = wrapper.querySelector('.play-button');
+      if (poster) poster.style.display = 'none';
+      if (playBtn) playBtn.style.display = 'none';
+      
+      wrapper.appendChild(iframe);
+    });
+  });
+}, 100);
 
 document.getElementById('toggleViewBtn').addEventListener('click', function (e) {
     e.preventDefault();
 
-    // ✅ Select the extra cards using the permanent 'extra' class
     const extraCards = document.querySelectorAll('.menu__card.extra');
 
-    // Toggle hidden class (this is what actually shows/hides them)
     extraCards.forEach(card => {
         card.classList.toggle('hidden');
     });
 
-    // ✅ Fix button text + keep the arrow icon every time
     const isMore = this.textContent.includes('More');
     this.innerHTML = isMore 
         ? `View Less <i class="ri-arrow-right-long-line"></i>` 
         : `View More <i class="ri-arrow-right-long-line"></i>`;
 });
 
-
-// Initialize Swiper
+// Initialize Testimonials Swiper
 const swiper2 = new Swiper('.testimonials__swiper', {
-  slidesPerView: 1, // Default for mobile
+  slidesPerView: 1,
   spaceBetween: 20,
   navigation: {
     nextEl: '.swiper-button-next',
@@ -156,14 +176,13 @@ const swiper2 = new Swiper('.testimonials__swiper', {
   },
   breakpoints: {
     640: {
-      slidesPerView: 2, // Two testimonials per row on tablets
+      slidesPerView: 2,
     },
     1024: {
-      slidesPerView: 3, // Three testimonials per row on desktops
+      slidesPerView: 3,
     },
   },
 });
-
 
 // Load Properties after everything is ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -171,25 +190,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("contactForm").addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent form submission
+  event.preventDefault();
 
-  // Get input values
   let name = document.getElementById("fullName").value.trim();
   let email = document.getElementById("email").value.trim();
   let message = document.getElementById("message").value.trim();
 
-  // Validate inputs
   if (name === "" || email === "" || message === "") {
     alert("Please fill in all fields.");
     return;
   }
 
-  // WhatsApp Number (replace with actual number)
-  let phoneNumber = "+2347071455454"; // Example: replace with your WhatsApp number
+  let phoneNumber = "+2347071455454";
 
-  // Format message for WhatsApp
   let whatsappMessage = `Hello, my name is ${name}. %0AEmail: ${email} %0A%0A${message}`;
 
-  // Open WhatsApp chat
   window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, "_blank");
 });

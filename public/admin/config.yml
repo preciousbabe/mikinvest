@@ -11,12 +11,12 @@ collections:
     label: "Properties"
     folder: "content/properties"
     create: true
-    slug: "{{fields.slug}}"       # <- use hidden slug for filenames
-    identifier_field: "slug"     # <- explicitly tells CMS what field is the unique ID
+    slug: "{{fields.slug}}"
+    identifier_field: "slug"
     format: "json"
 
     fields:
-      # Hidden slug ensures unique filenames and allows all other fields to be optional
+      # Hidden slug for unique filenames
       - label: "Slug"
         name: "slug"
         widget: "hidden"
@@ -40,10 +40,11 @@ collections:
         required: false
         default: ""
 
+      # ✅ Image is now REQUIRED
       - label: "Image (Flyer)"
         name: "image"
         widget: "image"
-        required: false
+        required: true
         allow_multiple: false
 
       - label: "Extra Notes"

@@ -15,25 +15,31 @@ async function loadProperties() {
             return;
         }
 
-        let visibleIndex = 0; // ✅ ensures hidden logic works after skipping empty ones
+        let visibleIndex = 0;
 
         properties.forEach((property) => {
+            // ✅ Skip if no image (since image is now required)
+            if (!property.image || property.image.trim() === '') {
+                console.warn('Property skipped: No image provided', property);
+                return;
+            }
 
-            // ✅ Skip completely empty properties
+            // ✅ Skip completely empty properties (optional safety)
             if (
                 !property.title?.trim() &&
                 !property.price?.trim() &&
                 !property.location?.trim() &&
-                !property.image
+                !property.body?.trim()
             ) {
-                return;
+                // Still allow if there's an image (as per your request)
+                // Only skip if literally nothing else + no image (already handled above)
             }
 
-          // ✅ NEW: Add both 'extra' (for permanent selection) + 'hidden' for the first 4+
-             const extraClass = visibleIndex >= 4 ? ' extra hidden' : '';
+            // Hidden logic for "View More"
+            const extraClass = visibleIndex >= 4 ? ' extra hidden' : '';
             visibleIndex++;
 
-            // ✅ Safe trimmed rendering
+            // Safe trimmed values
             const titleHTML = property.title?.trim()
                 ? `<h4>${property.title}</h4>`
                 : '';
@@ -46,21 +52,25 @@ async function loadProperties() {
                 ? `<span>${property.price}</span>`
                 : '';
 
-            // ✅ Fix image path issues
-            let imageSrc = '';
-            if (property.image) {
-                imageSrc = property.image.startsWith('/')
-                    ? property.image
-                    : '/' + property.image;
+            const bodyHTML = property.body?.trim()
+                ? `<p>${property.body}</p>`
+                : '';
+
+            // Fix image path
+            let imageSrc = property.image;
+            if (!imageSrc.startsWith('/')) {
+                imageSrc = '/' + imageSrc;
             }
 
-                 const card = `
+            const card = `
                 <div class="menu__card${extraClass}">
-                  ${imageSrc ? `<img src="${imageSrc}" alt="${property.title?.trim() || 'Property'}" />` : ''}
+                    <img src="${imageSrc}" alt="${property.title?.trim() || 'Property'}" />
+                    
                     <div class="menu__card__content">
                         ${titleHTML}
                         ${locationHTML}
                         ${priceHTML}
+                        ${bodyHTML}
                     </div>
                 </div>
             `;
@@ -68,7 +78,7 @@ async function loadProperties() {
             grid.innerHTML += card;
         });
 
-        // ✅ Extra safety: if everything got filtered out
+        // Extra safety
         if (grid.innerHTML.trim() === '') {
             grid.innerHTML = `
                 <p style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
@@ -76,7 +86,7 @@ async function loadProperties() {
                 </p>`;
         }
 
-                // ✅ Auto-hide toggle button if there are 4 or fewer valid properties
+        // ✅ Auto-hide toggle button if ≤ 4 properties
         const toggleBtn = document.getElementById('toggleViewBtn');
         if (toggleBtn) {
             const hasExtra = grid.querySelector('.menu__card.extra');
@@ -85,7 +95,6 @@ async function loadProperties() {
 
     } catch (err) {
         console.error('Error loading properties:', err);
-
         document.getElementById('propertyGrid').innerHTML = `
             <p style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
                 Failed to load properties.<br>

@@ -179,6 +179,109 @@
     </div>
   </section>
 
+
+  <!-- ========================= -->
+<!-- SMART HOMES SECTION -->
+<!-- ========================= -->
+
+<section class="smart-homes-section">
+
+    <div class="smart-bg-glow"></div>
+
+    <div class="smart-container">
+
+        <div class="smart-left">
+
+            <span class="smart-tag">
+                FUTURE OF LIVING
+            </span>
+
+            <h2>
+                Smart Homes By
+                <span>Miki Homes Real Estate</span>
+            </h2>
+
+            <p class="smart-description">
+                Experience modern living powered by intelligent technology.
+                Our smart homes are designed to deliver convenience,
+                luxury, security, and energy efficiency — all seamlessly
+                integrated into your everyday lifestyle.
+            </p>
+
+            <div class="smart-grid">
+
+                <div class="smart-card">
+                    <div class="smart-icon">🏠</div>
+                    <h4>Home Automation</h4>
+                    <p>
+                        Control lighting, appliances, and home systems
+                        effortlessly from your smartphone.
+                    </p>
+                </div>
+
+                <div class="smart-card">
+                    <div class="smart-icon">🔒</div>
+                    <h4>Advanced Security</h4>
+                    <p>
+                        Smart locks, CCTV integration, and real-time
+                        monitoring for complete peace of mind.
+                    </p>
+                </div>
+
+                <div class="smart-card">
+                    <div class="smart-icon">⚡</div>
+                    <h4>Energy Efficiency</h4>
+                    <p>
+                        Intelligent systems designed to optimize energy
+                        usage and reduce unnecessary costs.
+                    </p>
+                </div>
+
+                <div class="smart-card">
+                    <div class="smart-icon">🎙️</div>
+                    <h4>Voice Control</h4>
+                    <p>
+                        Compatible with modern voice assistants for
+                        seamless hands-free living.
+                    </p>
+                </div>
+
+            </div>
+
+            <a href="#properties" class="smart-btn">
+                Explore Smart Properties
+            </a>
+
+        </div>
+
+        <div class="smart-right">
+
+            <div class="smart-image-wrapper">
+
+                <img
+                    src="assets/WhatsApp Image 2026-03-29 at 22.49.23.jpeg"
+                    alt="Smart Home"
+                >
+
+                <div class="smart-floating-card">
+
+                    <h3>Smart Living</h3>
+
+                    <p>
+                        Elegant homes built with modern automation,
+                        intelligent security, and connected comfort.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
   
   <section class="gallery__container" id="gallery">
     <h2 class="section__header">Photo Gallery</h2>
@@ -211,7 +314,7 @@
           <img src="assets/IMG-20250202-WA0044.jpg" alt="photo8">
         </div>
         <div class="swiper-slide gallery__item">
-          <img src="public/assets/IMG-20250202-WA0045.jpg" alt="photo9">
+          <img src="assets/IMG-20250202-WA0045.jpg" alt="photo9">
         </div>
         <div class="swiper-slide gallery__item">
           <img src="assets/IMG-20250202-WA0046.jpg" alt="photo10">
@@ -228,13 +331,14 @@
     </div>
   </section>
 
+
   <!-- videos -->
 
   <section class="gallery__container" id="gallery">
-  <h2 class="section__header">Video Gallery</h2>
-  
-  <div class="swiper gallery__swiper">
-    <div class="swiper-wrapper">
+    <h2 class="section__header">Video Gallery</h2>
+    
+    <div class="swiper gallery__swiper">
+      <div class="swiper-wrapper">
 
       <!-- Video 1 -->
       <div class="swiper-slide gallery__item video">
@@ -260,7 +364,14 @@
         </div>
       </div>
 
-      <!-- Repeat for all videos... -->
+        <div class="swiper-slide gallery__item video">
+        <div class="video-wrapper" data-video-id="M9effYecsEc">
+          <img class="video-poster" src="https://img.youtube.com/vi/M9effYecsEc/hqdefault.jpg" alt="Video 7">
+          <div class="play-button">&#9658;</div>
+        </div>
+      </div>
+
+      
       <div class="swiper-slide gallery__item video">
         <div class="video-wrapper" data-video-id="vtfy8uS47yE">
           <img class="video-poster" src="https://img.youtube.com/vi/vtfy8uS47yE/hqdefault.jpg" alt="Video 4">
@@ -282,12 +393,7 @@
         </div>
       </div>
 
-      <div class="swiper-slide gallery__item video">
-        <div class="video-wrapper" data-video-id="M9effYecsEc">
-          <img class="video-poster" src="https://img.youtube.com/vi/M9effYecsEc/hqdefault.jpg" alt="Video 7">
-          <div class="play-button">&#9658;</div>
-        </div>
-      </div>
+    
 
     </div>
     <!-- Add pagination, navigation buttons -->
@@ -453,7 +559,7 @@
     <div class="responsive-container-block bigContainer">
       <div class="responsive-container-block Container">
         <div class="responsive-cell-block wk-desk-5 wk-ipadp-4 wk-tab-12 wk-mobile-12">
-          <img class="mainImg" src="./assets/ceo.jpg" alt="CEO">
+          <img class="mainImg" src="./assets/51309.jpg" alt="CEO">
         </div>
         <div class="responsive-cell-block wk-desk-7 wk-ipadp-8 wk-tab-12 wk-mobile-12">
           <p class="text-blk heading">Contact Us</p>
@@ -537,26 +643,6 @@
     </div>
   </footer>
 
-  <script>
-document.querySelectorAll('.video-wrapper').forEach(wrapper => {
-  wrapper.addEventListener('click', () => {
-    const videoId = wrapper.dataset.videoId;
-
-    const iframe = document.createElement('iframe');
-
-    // ✅ UPDATED iframe with parameters
-    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0&controls=1`;
-
-    iframe.frameBorder = "0";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowFullscreen = true;
-
-    // clear thumbnail and insert iframe
-    wrapper.innerHTML = '';
-    wrapper.appendChild(iframe);
-  });
-});
-</script>
   
   
    <!-- Netlify Identity -->
